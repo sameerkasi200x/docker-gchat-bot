@@ -1,0 +1,36 @@
+version: "3.2"
+
+services:
+  google-chat-bot:
+    image: dtr.example.com:12443/myuser/google-chat-bot:b1
+    deploy:
+      replicas: 1
+      labels:
+        com.docker.lb.hosts: google-chat-bot.demoapps.example.com
+        com.docker.lb.network: google-chat-net
+        com.docker.lb.port: 5000
+        com.docker.lb.ssl_cert: google-chat_demoapps.example.com.cert
+        com.docker.lb.ssl_key: google-chat_demoapps.example.com.key
+    environment:
+      METADATA: proxy-handles-tls
+      GCHAT_WEBHOOK_SECRET_FILE: /run/secrets/gchat_webhook
+      JENKINS_URL_SECRET_FILE: /run/secrets/jenkins_url
+      GCHAT_WEBHOOK_ENDPOINT: gchat_webhook
+      GCHAT_BOT_ENDPOINT: bot_endpoint
+    secrets:
+      - gchat_webhook 
+      - jenkins_url
+    networks:
+      - google-chat-net
+networks:
+  google-chat-net:
+    driver: overlay
+secrets:
+  demoapps.example.com.cert:
+    file: ./demoapps.example.com.cert
+  demoapps.example.com.key:
+    file: ./demoapps.example.com.key
+  gchat_webhook:
+    file: ./gchat_webhook.txt
+  jenkins_url:
+    file: ./jenkins_url.txt 
