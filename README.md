@@ -17,8 +17,8 @@ The code is based on two examples provided by Google:
 
 This code depends on setup of [Docker Trusted Registry](https://docs.docker.com/ee/dtr/), GitHub and Jenkins. Once you setup this code, you should also enable [Google Chat API](https://developers.google.com/hangouts/chat/how-tos/bots-publish) and register the bot.
 
-### Docker EE setup
-*(WIP - a different Markdown file to be added for this)*
+1. [Docker EE setup](https://github.com/sameerkasi200x/docker-gchat-bot/blob/master/Docker-EE-setup.md)
+
 ### GitHub Repository Setup
 *(WIP - a different Markdown file to be added for this)*
 ### Jenkins Setup 
