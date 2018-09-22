@@ -47,3 +47,55 @@ eval "$(<env.sh)";
 
 ### 4. Test Client Bundle
 Once you have the client bundle you can test basic swarm and Kubernetest (using kubectl) command against UCP cluster
+
+```
+docker node ls
+
+docker container ls
+
+```
+
+### 5. Configure DTR
+
+We need to change DTR configuration to enable vulnerability scanning. It is quite easy. You need to login to Docker Store (https://store.docker.com) using your Docker Hub account and download the CVE database. You will get a zip/tar.gz file. Go to dtr URL using FQDN of DTR node or the load balancer e.g.
+
+[https://dtr.example.com/system/settings/security](https://dtr.example.com/system/settings/security)
+
+And then click on *ENABLE SCANNING* and upload the CVE database. If you docker node running DTR has internet connection, you can also choose to get CVE database **ONLINE**
+
+If you are facing any problem [docker documentation](https://docs.docker.com/ee/dtr/admin/configure/set-up-vulnerability-scans/) has detailed section on making this change.
+
+You should also consider changing confiruation to allow creation of a new repository on push. You can do it by using DTR API:
+
+```
+export ADMIN_USER=admin ## Change as per the admin username provided during UCP installation
+
+export ADMIN_PASSWORD=password-for-admin-user 
+
+export $DTR_URL=https://url-dtr[:port]   ### e.g. https://dtr.example.com
+
+curl --user $ADMIN_USER:$ADMIN_PASSWORD \
+--request POST "${DTR_URL}/api/v0/meta/settings" \
+--header "accept: application/json" --insecure \
+--header "content-type: application/json" \
+--data "{ \"createRepositoryOnPush\": true}"
+```
+
+You can also do this from DTR web console by going to General Settings section
+
+[https://dtr.example.com/system/settings/general](https://dtr.example.com/system/settings/general)
+
+Go to the section for *Repositories* and enable *CREATE REPOSITORY ON PUSH*.
+
+### 6. Create A repository in DTR
+Login to your dtr URL (this would be the FQDN of the worker node running DTR or the load-balancer and click on new repository
+![DTR add repo](https://docs.docker.com/ee/dtr/images/create-repository-1.png)
+
+Add name and details
+![DTR add repo details](https://docs.docker.com/ee/dtr/images/create-repository-2.png)
+
+Click on *Show advanced settings* and set **IMMUTABILITY** to ON and *SCAN ON PUSH* to **On push**.
+
+### 7. Enable Layer-7 Routing in UCP
+
+
