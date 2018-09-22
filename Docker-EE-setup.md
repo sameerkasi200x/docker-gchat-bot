@@ -1,3 +1,5 @@
+# Configuration of Docker EE Platform
+
 ## Install and Setup Docker EE
 
 You can follow the online Docker documentation to install and configure Docker EE:
@@ -45,7 +47,7 @@ unzip client-bundle.zip;
 eval "$(<env.sh)";
 ```
 
-### 4. Test Client Bundle
+## Test Client Bundle
 Once you have the client bundle you can test basic swarm and Kubernetest (using kubectl) command against UCP cluster
 
 ```
@@ -55,7 +57,7 @@ docker container ls
 
 ```
 
-### 5. Configure DTR
+## Configure DTR
 
 We need to change DTR configuration to enable vulnerability scanning. It is quite easy. You need to login to Docker Store (https://store.docker.com) using your Docker Hub account and download the CVE database. You will get a zip/tar.gz file. Go to dtr URL using FQDN of DTR node or the load balancer e.g.
 
@@ -87,7 +89,7 @@ You can also do this from DTR web console by going to General Settings section
 
 Go to the section for *Repositories* and enable *CREATE REPOSITORY ON PUSH*.
 
-### 6. Create A repository in DTR
+## Create A repository in DTR
 Login to your dtr URL (this would be the FQDN of the worker node running DTR or the load-balancer and click on new repository
 ![DTR add repo](https://docs.docker.com/ee/dtr/images/create-repository-1.png)
 
@@ -96,6 +98,6 @@ Add name and details
 
 Click on *Show advanced settings* and set **IMMUTABILITY** to ON and *SCAN ON PUSH* to **On push**.
 
-### 7. Enable Layer-7 Routing in UCP
+## Enable Layer-7 Routing in UCP
 
 
