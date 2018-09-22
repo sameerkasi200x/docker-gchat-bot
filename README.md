@@ -15,12 +15,14 @@ The code is based on two examples provided by Google:
 
 ## Setting up dependencies
 
-This code depends on setup of DTR, GitHub and Jenkins. Before you can starting using this code, you should also enable Google Chat API and register a service account.
+This code depends on setup of [Docker Trusted Registry](https://docs.docker.com/ee/dtr/), GitHub and Jenkins. Once you setup this code, you should also enable [Google Chat API](https://developers.google.com/hangouts/chat/how-tos/bots-publish) and register the bot.
 
-1. Docker Trusted Registry (DTR) setup *(WIP - a different Markdown file to be added for this)*
-2. GitHub Repository Setup *(WIP - a different Markdown file to be added for this)*
-3. Jenkins Setup *(WIP - a different Markdown file to be added for this)*
-4. Google Chat Account Setup *(WIP - a different Markdown file to be added for this)*
+### Docker EE setup
+*(WIP - a different Markdown file to be added for this)*
+### GitHub Repository Setup
+*(WIP - a different Markdown file to be added for this)*
+### Jenkins Setup 
+*(WIP - a different Markdown file to be added for this)*
 
 ## Setting up this code as a Docker Swarm Service
 
