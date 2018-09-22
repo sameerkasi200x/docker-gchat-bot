@@ -58,5 +58,17 @@ Once this code is up and running with a valid URL you can go ahead and setup you
 1. Setup Google Chat Bot *(WIP - a different Markdown file to be added for this)*
 2. Setup Incoming Webhook for Google Chat room *(WIP - a different Markdown file to be added for this)*
 
-## Setup DTR Repository
+## Setup DTR Webhook
+
+
+## Things to do
+Code-wise few things which I can improve are:
+
+1. Allow admin to choose an image tag in the message. Currently it relies on Integration between Github and Jenkins.
+
+2. Handle corner cases where-in git code is updated and an image build is in progress and Admin says Deploy. As currently the image tag is fetched by Jenkins from Github (based on GIT COMMIT hash), this scenario would result into an error.
+
+3. Because the scan result is too huge, I had to omit the scan and image layer details. It would be nice to iterate through the scan result dictionary and send all the details in the subsequent messages (after sending in the summary). 
+
+4. Or may be allow Admin to ask for the details by saying "@bot get scan details". This would require integration with DTR API
 
