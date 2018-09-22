@@ -2,12 +2,12 @@
 
 Google Recently launched Google Chat for GSuite users. Though it is far from perfect, I found it quite useful and hope that it would become a good alternative to Slack. It allows you to have DM (one-on-one) chat and create rooms (kind of group chat) - generalized as a [*SPACE*](https://developers.google.com/hangouts/chat/concepts/cards). You can add [Chat Bots](https://developers.google.com/hangouts/chat/concepts/bots) to these spaces to automate tasks like voting, create calendar invite, setup video call etc. You can also setup [Incoming Webhooks](https://developers.google.com/hangouts/chat/how-tos/webhooks) in spaces so that you can deliver messages to spaces by remotely invoking a URL.
 
-![Build and Chat flow](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/Google%20Chat-Bot-for-Docker-Trusted-Registry-Draw.io.png)
-
 This is a simple Python code to implement team integration/communication for Docker Trusted Registry with Google Chat Bot and Google Chat's Incoming Webhook. In its current form it can be useful to:
 
 1. Send notifications in a Google Chat Room whenever a new image is pushed to Docker Trusted Registry. This uses [DTR's webhook features](https://docs.docker.com/ee/dtr/user/create-and-manage-webhooks/).
 2. Deploy latest image using [Jenkins's Generic Webhook Trigger](https://wiki.jenkins.io/display/JENKINS/Generic+Webhook+Trigger+Plugin). This particular implementation just triggers a Jenkins build which internally knows how to get the latest image (by using the GIT_COMMIT). But it is quite easy to pass the image tag as the body of the JSON message passed by Chat Bot to Jenkins's webhook endoint.
+
+![Build and Chat flow](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/Google%20Chat-Bot-for-Docker-Trusted-Registry-Draw.io.png)
 
 The code is based on two examples provided by Google:
 + [Simple Chat Bot with Python & Flask](https://developers.google.com/hangouts/chat/how-tos/bots-develop)
