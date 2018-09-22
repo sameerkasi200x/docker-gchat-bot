@@ -1,11 +1,11 @@
 ## Install and Setup Docker EE
 
 You can follow the online Docker documentation to install and configure Docker EE:
-1. [Install Docker Universal Control Plane](https://docs.docker.com/ee/ucp/admin/install/) 
+1. [Install Docker Universal Control Plane](https://docs.docker.com/ee/ucp/admin/install/). Once the installation is done, acces the UCP portal using the FQDN of the maanger node and install docker EE license. You can obtain a trial license by logging-in to the [Docker Store](https://store.docker.com) and download your trial license and upload that by going to UCP admin settings.
 
 2. [Add worker (and optionally manager) nodes to UCP](https://docs.docker.com/ee/ucp/admin/configure/join-nodes/join-linux-nodes-to-cluster/) 
 
-3. [Docker Trusted Registry](https://docs.docker.com/ee/dtr/admin/install/) on UCP cluster.
+3. [Docker Trusted Registry](https://docs.docker.com/ee/dtr/admin/install/) on UCP cluster. Optionally [setup HA for DTR](https://docs.docker.com/ee/dtr/admin/configure/set-up-high-availability/) and [change the storage backend for the DTR](https://docs.docker.com/ee/dtr/admin/configure/external-storage/).
 
 4. The DTR setup uses self-signed certificates, so we need to configure Docker UCP worker nodes to trust DTR. You can follow [this online documentation](https://docs.docker.com/ee/dtr/user/access-dtr/) to download DTR certificate and add that to list of trusted authorities on all worker nodes.
 
@@ -20,14 +20,15 @@ Ensure that the UCP is setup using certificate with all manager nodes and load b
 export ucp_user=admin ##Set to the actual username which you used during the ucp install command
 export ucp_password=ucp_admin_password ## Set this to the password provided in ucp install command or keyed-in during interactive installation
 export ucp_address=ucp_manager_node_name[:port]  ## Set this to the FQDN of the manager node or set this to FQDN by which the load-balancer is identified. Optionally also include the port if UCP is not listening on default 443 port.
-````
+```
 
 ### 2. Get a new auth token
-````
+```
 export AUTHTOKEN=$(curl -sk -d '{"username":"'"${ucp_user}"'","password":"'"${ucp_password}"'"}' https://${ucp_address}/auth/login | awk -F "\"" '{print $4}');
 
-echo $AUTHTOKEN
+echo $AUTHTOKEN 
 ```
+
 
 You should see a valid auth token as an output of second command here. If you don't see that, then try to debug the first command. Sample output:
 
@@ -40,23 +41,9 @@ $ echo $AUTHTOKEN
 
 ```
 curl -k -H "Authorization: Bearer $AUTHTOKEN" https://${ucp_address}/api/clientbundle -o client-bundle.zip;
-
 unzip client-bundle.zip;
 eval "$(<env.sh)";
 ```
 
 ### 4. Test Client Bundle
 Once you have the client bundle you can test basic swarm and Kubernetest (using kubectl) command against UCP cluster
-
-```
-docker node ls
-
-docker container ls
-
-```
-
-## Create A registry in DTR
-
-## Enable Layer-7 Routing
-
-
