@@ -94,12 +94,11 @@ Login to your dtr URL (this would be the FQDN of the worker node running DTR or 
 ![DTR add repo](https://docs.docker.com/ee/dtr/images/create-repository-1.png)
 
 
-Add name and details
+Add name and details and then click on *Show advanced settings* and set **IMMUTABILITY** to ON and *SCAN ON PUSH* to **On push**.
 
 
-![DTR add repo details](https://docs.docker.com/ee/dtr/images/create-repository-2.png)
+![DTR add repo details](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/images/dtr-repo-creation.PNG)
 
-Click on *Show advanced settings* and set **IMMUTABILITY** to ON and *SCAN ON PUSH* to **On push**.
 
 ## Enable Layer-7 Routing in UCP
 
@@ -107,17 +106,14 @@ Click on *Show advanced settings* and set **IMMUTABILITY** to ON and *SCAN ON PU
 Docker engine running in swarm mode (or with UCP cluster) offers routing mesh which makes it easier for you to expose service to the users and other services which are outside your Docker Cluster. Routhing mesh enables an internal load-balancer and allows every node to listen for the exposed port. Hence user traffic can be routed to any of the nodes and it will be internally routed to the swarm service.
 
 
-
-![Swarm Routing Mesh](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/Swarm-Routing-Mesh.png)
+![Swarm Routing Mesh](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/images/Swarm-Routing-Mesh.png)
 
 
 ### Layer-7 Routing
 One of the limitations with Swarm Routing Mesh is with respec to opening up ports and availability of ports. Once you start rolling out more and more services, you will be restricted by the number of ports you can afford to map and open up every port (that you map to a swarm service) in your firewall. UCP helps you overcome this limitation with layer 7 layer routing, allowing users to access Docker services using domain names instead of IP addresses. Domain names are mapped to service containers by using an internal proxy service (called Interlock Proxy - ucp-interlock-proxy). The proxy service is updated whenever you deploy a new serivce. This (config update) is handled by another service called Interlock Extension(ucp-interlock-extension). Interlock Extension service receives updates about new events from the main service called Interlock (ucp-interlock).
 
 
-
-
-![Layer 7 Routing with UCP](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/UCP-Layer-7-Routing-Interlock.png)
+![Layer 7 Routing with UCP](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/images/UCP-Layer-7-Routing-Interlock.png)
 
 
 ### Benefits
@@ -149,7 +145,7 @@ Or simple go to the URL:
 Change the port if needed and enable Layer 7 Routing:
 
 
-![UCP Layer 7 Routing Configuration](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/UCP-Layer-7-Routing-configuration-snapshot.PNG)
+![UCP Layer 7 Routing Configuration](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/images/UCP-Layer-7-Routing-configuration-snapshot.PNG)
 
 
 ### Understanding Deployment Life Cycle
