@@ -28,11 +28,13 @@ This code depends on setup of [Docker Trusted Registry](https://docs.docker.com/
 
 This sample deploys the sample code as a service on [Docker Universal Control Plane](https://docs.docker.com/ee/ucp/) using Swarm orchestration. You might want to read a bit about Docker Swarm Service and [Layer-7 Routing using Interlock](https://docs.docker.com/ee/ucp/interlock/architecture/#routing-lifecycle) in Docker UCP. 
 
-It is quite simple to enable [Layer-7 Routing in UCP](https://docs.docker.com/ee/ucp/interlock/deploy/) and you can refer to my GitHub repository [docker-ci-cd](https://github.com/sameerkasi200x/docker-ci-cd) for an example of how swarm service can be deployed with Layer-7 Routing.
+It is quite simple to enable [Layer-7 Routing in UCP](https://docs.docker.com/ee/ucp/interlock/deploy/). I have tried to cover the concept and deployment flow in more detail over [here](https://github.com/sameerkasi200x/docker-gchat-bot/blob/master/Docker-EE-setup.md#enable-layer-7-routing-in-ucp).
 
 Sample code to deploy this service
 
 ```
+git clone https://github.com/sameerkasi200x/docker-gchat-bot.git
+cd docker-gchat-bot/code
 export old_tag=b1
 export tag=$(date +%Y%m%d%H%M%S)
 
