@@ -19,10 +19,10 @@ This code depends on setup of [Docker Trusted Registry](https://docs.docker.com/
 
 1. [Docker EE setup](https://github.com/sameerkasi200x/docker-gchat-bot/blob/master/Docker-EE-setup.md)
 
-2. [GitHub repository setup](https://github.com/sameerkasi200x/docker-gchat-bot/blob/master/GitHub-repo-setup.md)
-
-### Jenkins Setup 
+2. [Jenkins Setup](https://github.com/sameerkasi200x/docker-gchat-bot/blob/master/Jenkins-setup.md)
 *(WIP - a different Markdown file to be added for this)*
+
+3. [GitHub repository setup](https://github.com/sameerkasi200x/docker-gchat-bot/blob/master/GitHub-repo-setup.md)
 
 ## Setting up sample bot code as a Docker Swarm Service
 
