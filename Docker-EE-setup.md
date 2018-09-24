@@ -59,7 +59,7 @@ docker container ls
 
 ## Configure DTR
 
-We need to change DTR configuration to enable vulnerability scanning. It is quite easy. You need to login to Docker Store (https://store.docker.com) using your Docker Hub account and download the CVE database. You will get a zip/tar.gz file. Go to dtr URL using FQDN of DTR node or the load balancer e.g.
+We need to change DTR configuration to enable vulnerability scanning. It is quite easy. You need to login to [Docker Store](https://store.docker.com) using your Docker Hub account and download the CVE database. You will get a zip/tar.gz file. Go to dtr URL using FQDN of DTR node or the load balancer e.g.
 
 [https://dtr.example.com/system/settings/security](https://dtr.example.com/system/settings/security)
 
@@ -90,14 +90,18 @@ You can also do this from DTR web console by going to General Settings section
 Go to the section for *Repositories* and enable *CREATE REPOSITORY ON PUSH*.
 
 ## Create A repository in DTR
-Login to your dtr URL (this would be the FQDN of the worker node running DTR or the load-balancer and click on new repository
+Login to your dtr URL (this would be the FQDN of the worker node running DTR or the load-balancer) and click on new repository
 ![DTR add repo](https://docs.docker.com/ee/dtr/images/create-repository-1.png)
 
+
 Add name and details
+
+
 ![DTR add repo details](https://docs.docker.com/ee/dtr/images/create-repository-2.png)
 
 Click on *Show advanced settings* and set **IMMUTABILITY** to ON and *SCAN ON PUSH* to **On push**.
 
 ## Enable Layer-7 Routing in UCP
+*WIP*
 
 
