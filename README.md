@@ -7,7 +7,7 @@ This is a simple Python code to implement team integration/communication for Doc
 1. Send notifications in a Google Chat Room whenever a new image is pushed to Docker Trusted Registry. This uses [DTR's webhook features](https://docs.docker.com/ee/dtr/user/create-and-manage-webhooks/).
 2. Deploy latest image using [Jenkins's Generic Webhook Trigger](https://wiki.jenkins.io/display/JENKINS/Generic+Webhook+Trigger+Plugin). This particular implementation just triggers a Jenkins build which internally knows how to get the latest image (by using the GIT_COMMIT). But it is quite easy to pass the image tag as the body of the JSON message passed by Chat Bot to Jenkins's webhook endoint.
 
-![Build and Chat flow](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/Google%20Chat-Bot-for-Docker-Trusted-Registry-Draw.io.png)
+![Build and Chat flow](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/images/Google%20Chat-Bot-for-Docker-Trusted-Registry-Draw.io.png)
 
 The code is based on two examples provided by Google:
 + [Simple Chat Bot with Python & Flask](https://developers.google.com/hangouts/chat/how-tos/bots-develop)
