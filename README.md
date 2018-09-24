@@ -1,4 +1,4 @@
-## Integrating Docker Trusted Registry with Google Chat
+# Integrating Docker Trusted Registry with Google Chat
 
 Google Recently launched Google Chat for GSuite users. Though it is far from perfect, I found it quite useful and hope that it would become a good alternative to Slack. It allows you to have DM (one-on-one) chat and create rooms (kind of group chat) - generalized as a [*SPACE*](https://developers.google.com/hangouts/chat/concepts/cards). You can add [Chat Bots](https://developers.google.com/hangouts/chat/concepts/bots) to these spaces to automate tasks like voting, create calendar invite, setup video call etc. You can also setup [Incoming Webhooks](https://developers.google.com/hangouts/chat/how-tos/webhooks) in spaces so that you can deliver messages to spaces by remotely invoking a URL.
 
@@ -19,12 +19,12 @@ This code depends on setup of [Docker Trusted Registry](https://docs.docker.com/
 
 1. [Docker EE setup](https://github.com/sameerkasi200x/docker-gchat-bot/blob/master/Docker-EE-setup.md)
 
-### GitHub Repository Setup
-*(WIP - a different Markdown file to be added for this)*
+2. [GitHub repository setup](https://github.com/sameerkasi200x/docker-gchat-bot/blob/master/GitHub-repo-setup.md)
+
 ### Jenkins Setup 
 *(WIP - a different Markdown file to be added for this)*
 
-## Setting up this code as a Docker Swarm Service
+## Setting up sample bot code as a Docker Swarm Service
 
 This sample deploys the sample code as a service on [Docker Universal Control Plane](https://docs.docker.com/ee/ucp/) using Swarm orchestration. You might want to read a bit about Docker Swarm Service and [Layer-7 Routing using Interlock](https://docs.docker.com/ee/ucp/interlock/architecture/#routing-lifecycle) in Docker UCP. 
 
