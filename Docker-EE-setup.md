@@ -102,6 +102,91 @@ Add name and details
 Click on *Show advanced settings* and set **IMMUTABILITY** to ON and *SCAN ON PUSH* to **On push**.
 
 ## Enable Layer-7 Routing in UCP
-*WIP*
+
+## Swarm Routing Mesh
+Docker engine running in swarm mode (or with UCP cluster) offers routing mesh which makes it easier for you to expose service to the users and other services which are outside your Docker Cluster. Routhing mesh enables an internal load-balancer and allows every node to listen for the exposed port. Hence user traffic can be routed to any of the nodes and it will be internally routed to the swarm service.
 
 
+
+![Swarm Routing Mesh](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/Swarm-Routing-Mesh.png)
+
+
+### Layer-7 Routing
+One of the limitations with Swarm Routing Mesh is with respec to opening up ports and availability of ports. Once you start rolling out more and more services, you will be restricted by the number of ports you can afford to map and open up every port (that you map to a swarm service) in your firewall. UCP helps you overcome this limitation with layer 7 layer routing, allowing users to access Docker services using domain names instead of IP addresses. Domain names are mapped to service containers by using an internal proxy service (called Interlock Proxy - ucp-interlock-proxy). The proxy service is updated whenever you deploy a new serivce. This (config update) is handled by another service called Interlock Extension(ucp-interlock-extension). Interlock Extension service receives updates about new events from the main service called Interlock (ucp-interlock).
+
+
+
+
+![Layer 7 Routing with UCP](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/UCP-Layer-7-Routing-Interlock.png)
+
+
+### Benefits
+Main advantages of using UCP Interlock proxy/Layer 7 Routing:
+
++ **High availability:** All the components used for layer 7 routing leverage Docker swarm for high availability, and handle failures gracefully.
+
++ **Automatic configuration:** UCP monitors your services and automatically reconfigures the proxy services so that everything handled for you.
+
++ **Scalability:** You can customize and tune the proxy services that handle user-facing requests to meet whatever demand your services have.
+
++ **TLS:** You can leverage Docker secrets to securely manage TLS Certificates and keys for your services. Both TLS termination and TCP passthrough are supported.
+
++ **Context-based routing:** You can define where to route the request based on context or path.
+Host mode networking: By default layer 7 routing leverages the Docker Swarm routing mesh, but you don’t have to. You can use host mode networking for maximum performance.
+
++ **Security:** The layer 7 routing components that are exposed to the outside world run on worker nodes. Even if they get compromised, your cluster won’t.
+
+
+### Enable Layer-7 Routing with Interlock in UCP
+To enable Layer-7 routing, you need to login to UCP web-console and nagivate to 
+
+"Admin Settings-->Layer 7 Routing"
+
+Or simple go to the URL:
+
+[https://ucp.example.com/manage/settings/interlock](https://ucp.example.com/manage/settings/interlock)
+
+Change the port if needed and enable Layer 7 Routing:
+
+
+![UCP Layer 7 Routing Configuration](https://raw.githubusercontent.com/sameerkasi200x/docker-gchat-bot/master/UCP-Layer-7-Routing-configuration-snapshot.PNG)
+
+
+### Understanding Deployment Life Cycle
+Once the layer 7 routing service is enabled, you apply specific labels to your swarm services. The labels define the hostnames that are routed to the service, the ports used, and other routing configurations.
+
+Once you deploy or update a swarm service with those labels:
+
+1. The ucp-interlock service is monitoring the Docker API for events and publishes the events to the ucp-interlock-extension service.
+
+2. That service in turn generates a new configuration for the proxy service, based on the labels you’ve added to your services.
+
+3. The ucp-interlock service takes the new configuration and reconfigures the ucp-interlock-proxy to start using it.
+
+If the hostname or the network is not properly configured, you will get ```502- Bad Gateway error``` when you try to access the network.
+
+
+### Example Deployment
+When you deploy a service which needs to be mapped to a domainname/hostname by leveraging Interlock, you need to provide:
+
+1. hostname by which the service will be identified: ```com.docker.lb.hosts```
+2. port number on which the service is exposed with-in container: ```com.docker.lb.port```
+3. network name on which service is attached: ```com.docker.lb.network```
+
+```
+### Create the overlay network for application service
+docker network create --driver=overlay tweet-nw
+
+### Deploy application service with service lable for Interlock to pickup
+docker service create --network ucp-interlock --name tweet-to-us --mode replicated \
+        --replicas 2 \
+        --label com.docker.lb.hosts="tweet.apps.example.com" \
+        --label com.docker.lb.network="tweet-nw" \
+        --label com.docker.lb.port="80" \
+        --constraint 'node.platform.os==linux' \
+        --detach=true \
+        $dtr_url/development/tweet-to-us:b1
+```
+
+Reference:
+[1] [Official Docker Documentation o Interlock as Layer-7 Routing Mesh](https://docs.docker.com/ee/ucp/interlock/architecture/#deployment-lifecycle)
