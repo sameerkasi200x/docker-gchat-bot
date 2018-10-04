@@ -18,3 +18,8 @@ I prefer to use the [docker image provided by Jenkins team](https://hub.docker.c
 
 You can use the Dockerfile to create an image and create a Swarm or Kubernetes Service with that. You can also deploy the service with [Layer-7 routing](https://github.com/sameerkasi200x/docker-gchat-bot/blob/master/Docker-EE-setup.md#layer-7-routing) available in Docker EE 2.0.
 
+## Jenkins Configuration
+Once Jenkins is installed and setup, you can go ahead and 
+
+### Credentials
+
