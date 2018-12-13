@@ -115,3 +115,4 @@ If you are intrested to make this code better, feel free to make a pull request 
 
 4. Or may be allow Admin to ask for the details by saying "@bot get scan details". This would require integration with DTR API
 
+
