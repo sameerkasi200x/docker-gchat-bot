@@ -35,8 +35,10 @@ def on_event():
   if event['type'] == 'ADDED_TO_SPACE' and event['space']['type'] == 'ROOM':
     text = 'Thanks for adding me to "%s"!' % event['space']['displayName']
   elif event['type'] == 'MESSAGE' :
-    if contains_word( event['message']['text'].lower(), 'deploy' ) :  
-      response = requests.get(jenkins_job_url) 
+    if contains_word( event['message']['argumentText'].lower(), 'deploy' ) : 
+      msg_arg=event['message']['argumentText'].split(" ",3)
+      payload={'tag':msg_arg[2]}
+      response = requests.get(jenkins_job_url,json=payload) 
       text = response.text
     else :
       text = 'You said: `%s`' % event['message']['text']
